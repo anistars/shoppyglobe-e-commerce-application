@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 function ProductList() {
@@ -6,6 +7,7 @@ function ProductList() {
     const [loading, setLoading] = useState(true);
     const [cartCounts, setCartCounts] = useState({});
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://dummyjson.com/products')
@@ -61,7 +63,9 @@ function ProductList() {
                     {products.products && products.products.length > 0 ? (
                         products.products.map(product => (
                             <div className="col-md-4 mb-4" key={product.id}>
-                                <div className="card h-100 product-card shadow-sm" style={{ backgroundColor: "#f3f6f4" }}>
+                                <div className="card h-100 product-card shadow-sm" style={{ backgroundColor: "#f3f6f4", cursor: "pointer"}}
+                                    onClick={() => navigate(`/product/${product.id}`)}
+                                >
                                     <img
                                         src={product.thumbnail}
                                         className="card-img-top product-image"
@@ -75,11 +79,11 @@ function ProductList() {
                                             <button className="btn btn-outline-secondary btn-sm"
                                                 onClick={() => handleQuantityChange(product.id, -1)}
                                                 disabled={cartCounts[product.id] <= 1}
-                                            ><i class="bi bi-dash-circle"></i></button>
+                                            ><i className="bi bi-dash-circle"></i></button>
                                             <span className="mx-3 fs-5">{cartCounts[product.id] || 0}</span>
                                             <button className="btn btn-outline-secondary btn-sm"
                                                 onClick={() => handleQuantityChange(product.id, 1)}
-                                            ><i class="bi bi-plus-circle"></i></button>
+                                            ><i className="bi bi-plus-circle"></i></button>
                                         </div>
 
                                         <button className="btn btn-primary mx-auto"

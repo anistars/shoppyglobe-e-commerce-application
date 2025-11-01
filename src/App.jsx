@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './pages/Header.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProductDetails from './pages/ProductDetails.jsx';
 import ProductList from './pages/ProductList.jsx';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<ProductList />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
         </Router>
       </div>
