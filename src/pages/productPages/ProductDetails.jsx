@@ -50,6 +50,7 @@ function ProductDetails() {
                     )}
                 </div>
             </div>
+            <button className="btn btn-secondary mt-4" onClick={() => window.history.back()}>← Back to Products</button>
         </div>
     );
 }

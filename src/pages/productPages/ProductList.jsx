@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../index.css';
+import '../../index.css';
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -50,12 +50,11 @@ function ProductList() {
             <h2 className="mb-4">Product List</h2>
             <div className="position-relative">
                 {message && (
-                    <div className="floating-message alert alert-success text-center">
+                    <div className="cart-toast alert alert-success text-center">
                         {message}
                     </div>
                 )}
             </div>
-
             {loading ? (
                 <p>Loading products...</p>
             ) : (
@@ -63,7 +62,7 @@ function ProductList() {
                     {products.products && products.products.length > 0 ? (
                         products.products.map(product => (
                             <div className="col-md-4 mb-4" key={product.id}>
-                                <div className="card h-100 product-card shadow-sm" style={{ backgroundColor: "#f3f6f4", cursor: "pointer"}}
+                                <div className="card h-100 product-card shadow-sm" style={{ backgroundColor: "#f3f6f4", cursor: "pointer" }}
                                     onClick={() => navigate(`/product/${product.id}`)}
                                 >
                                     <img
@@ -77,17 +76,17 @@ function ProductList() {
                                         <p className="card-text fw-bold text-success">Price: ${product.price}</p>
                                         <div className="d-flex justify-content-center align-items-center my-3">
                                             <button className="btn btn-outline-secondary btn-sm"
-                                                onClick={() => handleQuantityChange(product.id, -1)}
+                                                onClick={(e) => { e.stopPropagation(); handleQuantityChange(product.id, -1) }}
                                                 disabled={cartCounts[product.id] <= 1}
                                             ><i className="bi bi-dash-circle"></i></button>
                                             <span className="mx-3 fs-5">{cartCounts[product.id] || 0}</span>
                                             <button className="btn btn-outline-secondary btn-sm"
-                                                onClick={() => handleQuantityChange(product.id, 1)}
+                                                onClick={(e) => { e.stopPropagation(); handleQuantityChange(product.id, 1) }}
                                             ><i className="bi bi-plus-circle"></i></button>
                                         </div>
 
                                         <button className="btn btn-primary mx-auto"
-                                            onClick={() => handleAddToCart(product.id)}
+                                            onClick={(e) => { e.stopPropagation(); handleAddToCart(product.id) }}
                                         >
                                             Add to Cart ({cartCounts[product.id] || 0})
 

@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './pages/Header.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductDetails from './pages/ProductDetails.jsx';
-import ProductList from './pages/ProductList.jsx';
+import ProductList from './pages/productPages/ProductList.jsx';
+import ProductDetails from './pages/productPages/ProductDetails.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0)
