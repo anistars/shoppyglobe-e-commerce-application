@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './pages/productPages/ProductList.jsx';
 import ProductDetails from './pages/productPages/ProductDetails.jsx';
+import Cart from './pages/cartPages/Cart.jsx';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path='/cart' element={<Cart />} />
           </Routes>
         </Router>
       </div>

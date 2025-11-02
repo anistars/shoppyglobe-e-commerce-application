@@ -1,5 +1,7 @@
 import { use, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../features/cartSlice.js';
 import '../../index.css';
 
 function ProductList() {
@@ -8,6 +10,7 @@ function ProductList() {
     const [cartCounts, setCartCounts] = useState({});
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetch('https://dummyjson.com/products')
@@ -35,12 +38,14 @@ function ProductList() {
     };
     const handleAddToCart = (productId) => {
         const quantity = cartCounts[productId] || 0;
+        const product = products.products.find(p => p.id === productId);
         const productTitle = products.products.find(p => p.id === productId)?.title || 'Product';
         if (quantity === 0) {
             setMessage(`⚠️ Please select at least 1 item of "${productTitle}" to add to cart`);
             setTimeout(() => setMessage(''), 3000);
             return;
         }
+        dispatch(addToCart({...product,quantity}));
         setMessage(`✅ Added ${quantity} of "${productTitle}" to cart`);
         setTimeout(() => setMessage(''), 3000);
 

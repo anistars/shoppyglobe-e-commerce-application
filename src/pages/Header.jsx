@@ -1,4 +1,7 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 function Header() {
+    const navigate=useNavigate();
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-dark fixed-top w-100"
@@ -8,7 +11,7 @@ function Header() {
                         ShoppyGlobe
                     </a>
                     <div className="d-flex ms-auto">
-                        <button className="btn btn-info" type="button">
+                        <button className="btn btn-info" type="button" onClick={() => navigate('/cart')}>
                             <i className="bi bi-cart"></i>
                         </button>
                     </div>
