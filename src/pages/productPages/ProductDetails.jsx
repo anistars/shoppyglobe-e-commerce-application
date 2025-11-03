@@ -23,10 +23,15 @@ function ProductDetails() {
         return <p className="mt-5 pt-5 text-center">Loading product details...</p>;
     }
     const handleQuantityChange = (delta) => {
-        setCartCounts(prevCounts => Math.max(1, prevCounts + delta));
+        setCartCounts(prevCounts => Math.max(0, prevCounts + delta));
     };
 
     const handleAddToCart = () => {
+        if (cartCounts <= 0) {
+            setMessage('Please select a quantity to add to cart.');
+            setTimeout(() => setMessage(''), 3000);
+            return;
+        }
         dispatch(addToCart({ ...product, quantity: cartCounts }));
         setMessage(`✅ Added ${cartCounts} of "${product.title}" to cart`);
         setTimeout(() => setMessage(''), 3000);
@@ -76,7 +81,7 @@ function ProductDetails() {
                     <div className="d-flex justify-content-center align-items-center my-3">
                         <button className="btn btn-outline-secondary btn-sm"
                             onClick={(e) => { handleQuantityChange(-1) }}
-                            disabled={cartCounts <= 1}
+                            disabled={cartCounts <= 0}
                         ><i className="bi bi-dash-circle"></i></button>
                         <span className="mx-3 fs-5">{cartCounts}</span>
                         <button className="btn btn-outline-secondary btn-sm"
@@ -86,7 +91,7 @@ function ProductDetails() {
                     <button className="btn btn-primary mx-auto"
                         onClick={handleAddToCart}
                     >
-                        Add to Cart ({cartCounts || 0})
+                        Add to Cart ({cartCounts})
 
                     </button>
                 </div>
