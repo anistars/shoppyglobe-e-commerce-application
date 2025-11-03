@@ -39,34 +39,33 @@ function CartDetails() {
                     {message}
                 </div>
             )}
-        <div className="container mt-5 pt-5">
-            <h2 className="mb-4">Cart Item Details</h2>
-            <div className="card shadow-sm p-3" style={{ backgroundColor: '#f3f6f4' }}>
-                <div className="row">
-                    <div className="col-md-4">
-                        <img
-                            src={item.thumbnail}
-                            alt={item.title}
-                            className="img-fluid rounded border"
-                            style={{ maxHeight: '300px', objectFit: 'cover' }}
-                        />
-                    </div>
-                    <div className="col-md-8">
-                        <h4>{item.title}</h4>
-                        <p className="text-muted">{item.description}</p>
-                        <p className="fw-bold text-success">Price: ${item.price}</p>
-                        <p>Quantity: {item.quantity}</p>
-                        <div className="d-flex align-items-center">
-                            <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantityChange(-1)}>-</button>
-                            <span className="mx-2">{tempQuantity}</span>
-                            <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantityChange(1)}>+</button>
+            <div className="container mt-5 pt-5">
+                <h2 className="mb-4">Cart Item Details</h2>
+                <div className="card shadow-sm p-3" style={{ backgroundColor: '#f3f6f4' }}>
+                    <div className="row align-items-center">
+                        <div className="col-md-4 text-center">
+                            <img
+                                src={item.thumbnail}
+                                alt={item.title}
+                                className="img-fluid rounded border"
+                                style={{ maxHeight: '300px', objectFit: 'cover' }}
+                            />
                         </div>
-                        <button className="btn btn-primary" onClick={handleUpdateQuantity}>Update Cart</button>
-                        <p className="mt-3">Total: ${item.price * tempQuantity}</p>
+                        <div className="col-md-8 d-flex flex-column justify-content-center">
+                            <h4>{item.title}</h4>
+                            <p className="text-muted">{item.description}</p>
+                            <p className="fw-bold text-success">Price: ${item.price}</p>
+                            <div className="d-flex justify-content-center align-items-center mb-3">
+                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantityChange(-1)}>-</button>
+                                <span className="mx-2">{tempQuantity}</span>
+                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantityChange(1)}>+</button>
+                            </div>
+                            <button className="btn btn-primary mx-auto" onClick={handleUpdateQuantity}>Update Cart</button>
+                            <p className="mt-2">Total: ${item.price * tempQuantity}</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </div >
+            </div >
         </>
     );
 }
