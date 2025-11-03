@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart, clearCart, updateQuantity } from '../../features/cartSlice.js';
 
 function Cart() {
     const cartItems = useSelector((state) => state.cart.items);
@@ -7,10 +8,9 @@ function Cart() {
     const handleQuantityChange = (id, delta) => {
         // Dispatch action to update quantity
         const item = cartItems.find(p => p.id === id);
-        if (item) {
-            const newQty = item.Math.max(1, item.quantity + delta);
-            dispatch(updateQuantity({ id, quantity: newQty }));
-        }
+        if (!item) return;
+        const newQty = Math.max(1, item.quantity + delta);
+        dispatch(updateQuantity({ id, quantity: newQty }));
     };
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     return (
