@@ -1,20 +1,45 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../features/cartSlice.js';
+import '../../index.css';
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [cartCounts, setCartCounts] = useState(0);
+    const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
+
     useEffect(() => {
         fetch(`https://dummyjson.com/products/${id}`)
             .then(res => res.json())
-            .then(data => setProduct(data))
+            .then(data => {
+                setProduct(data);
+            })
             .catch(error => console.error('Error fetching product details:', error));
     }, [id]);
     if (!product) {
         return <p className="mt-5 pt-5 text-center">Loading product details...</p>;
     }
+    const handleQuantityChange = (delta) => {
+        setCartCounts(prevCounts => Math.max(1, prevCounts + delta));
+    };
+
+    const handleAddToCart = () => {
+        dispatch(addToCart({ ...product, quantity: cartCounts }));
+        setMessage(`✅ Added ${cartCounts} of "${product.title}" to cart`);
+        setTimeout(() => setMessage(''), 3000);
+
+
+    }
     return (
         <div className="container mt-5 pt-5">
+            {message && (
+                <div className="cart-toast alert alert-success text-center">
+                    {message}
+                </div>
+            )}
             <div className="row">
                 <div className="col-md-6 mb-4">
                     <div className="card shadow-sm p-3" style={{ backgroundColor: '#f3f6f4' }}>
@@ -48,6 +73,22 @@ function ProductDetails() {
                     ) : (
                         <p>No reviews available for this product.</p>
                     )}
+                    <div className="d-flex justify-content-center align-items-center my-3">
+                        <button className="btn btn-outline-secondary btn-sm"
+                            onClick={(e) => { handleQuantityChange(-1) }}
+                            disabled={cartCounts <= 1}
+                        ><i className="bi bi-dash-circle"></i></button>
+                        <span className="mx-3 fs-5">{cartCounts}</span>
+                        <button className="btn btn-outline-secondary btn-sm"
+                            onClick={(e) => { handleQuantityChange(1) }}
+                        ><i className="bi bi-plus-circle"></i></button>
+                    </div>
+                    <button className="btn btn-primary mx-auto"
+                        onClick={handleAddToCart}
+                    >
+                        Add to Cart ({cartCounts || 0})
+
+                    </button>
                 </div>
             </div>
             <button className="btn btn-secondary mt-4" onClick={() => window.history.back()}>← Back to Products</button>
