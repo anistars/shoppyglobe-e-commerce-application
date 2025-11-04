@@ -10,6 +10,7 @@ function Cart() {
     const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [message, setMessage] = useState('');
     const [customer, setCustomer] = useState({
         name: '',
         email: '',
@@ -38,6 +39,7 @@ function Cart() {
     };
     return (
         <div className="container mt-5 pt-5">
+            {message && <div className="cart-toast alert alert-success text-center">{message}</div>}
             {showForm && (
                 <div className="modal-backdrop">
                     <div className="modal-content p-4 rounded shadow">
@@ -95,7 +97,14 @@ function Cart() {
                 </button>
                 <button
                     className="btn btn-success"
-                    onClick={() => setShowForm(true)}
+                    onClick={() => {
+                        if (cartItems.length === 0) {
+                            setMessage('Cart is empty. Add items before placing an order.');
+                            setTimeout(() => setMessage(''), 3000);
+                            return;
+                        }
+                        setShowForm(true)
+                    }}
                 >
                     Place Order
                 </button>
