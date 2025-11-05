@@ -87,27 +87,29 @@ function Cart() {
                     <p>Order placed successfully!</p>
                 </div>
             )}
-            <h2 className="mb-4">Shopping Cart</h2>
-            <div>
-                <button
-                    className="btn btn-warning me-2"
-                    onClick={() => dispatch(clearCart())}
-                >
-                    Clear Cart
-                </button>
-                <button
-                    className="btn btn-success"
-                    onClick={() => {
-                        if (cartItems.length === 0) {
-                            setMessage('Cart is empty. Add items before placing an order.');
-                            setTimeout(() => setMessage(''), 3000);
-                            return;
-                        }
-                        setShowForm(true)
-                    }}
-                >
-                    Place Order
-                </button>
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+                <h2 className="mb-0">🛒 Shopping Cart</h2>
+                <div className="d-flex flex-wrap gap-2">
+                    <button
+                        className="btn btn-warning me-2"
+                        onClick={() => dispatch(clearCart())}
+                    >
+                        Clear Cart
+                    </button>
+                    <button
+                        className="btn btn-success"
+                        onClick={() => {
+                            if (cartItems.length === 0) {
+                                setMessage('Cart is empty. Add items before placing an order.');
+                                setTimeout(() => setMessage(''), 3000);
+                                return;
+                            }
+                            setShowForm(true)
+                        }}
+                    >
+                        Place Order
+                    </button>
+                </div>
             </div>
             {cartItems.length === 0 ? (
                 <p>Your cart is empty.</p>
@@ -116,17 +118,20 @@ function Cart() {
                     <ul className="list-group mb-4">
                         {cartItems.map(item => (
                             <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
-                                <img src={item.thumbnail} alt={item.title} style={{ width: '200px', borderRadius: '8px' }} />
-                                <div className="flex-grow-1 mx-3">
-                                    <h6>{item.title}</h6>
-                                    <h6>Quantity: {item.quantity}</h6>
-                                    <h5 className="mb-1 text-muted">Total: ${item.price * item.quantity}</h5>
+                                <div className="row align-items-center">
+                                    <div className="col-12 col-md-3 text-center mb-3 mb-md-0">
+                                        <img src={item.thumbnail} alt={item.title} style={{ width: '200px', borderRadius: '8px' }} />
+                                    </div>
+                                    <div className="col-12 col-md-6">
+                                        <h6>{item.title}</h6>
+                                        <p className="mb-1">Quantity: {item.quantity}</p>
+                                        <h5 className="mb-1 text-muted">Total: ${item.price * item.quantity}</h5>
+                                    </div>
+                                    <div className="col-12 col-md-3 d-flex flex-column align-items-center gap-2">
+                                        <button className="btn btn-danger btn-sm w-100" onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
+                                        <button className="btn btn-outline-primary btn-sm w-100" onClick={() => navigate(`/cart-details/${item.id}`)}>View Details</button>
+                                    </div>
                                 </div>
-                                <div className="d-flex flex-column align-items-center">
-                                    <button className="btn btn-danger btn-sm" onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
-                                    <button className="btn btn-danger btn-sm mt-2" onClick={() => navigate(`/cart-details/${item.id}`)}>View Details</button>
-                                </div>
-
                             </li>
                         ))}
                     </ul>
