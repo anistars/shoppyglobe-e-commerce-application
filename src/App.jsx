@@ -1,31 +1,29 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './pages/Header.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from './pages/productPages/ProductList.jsx';
-import ProductDetails from './pages/productPages/ProductDetails.jsx';
-import Cart from './pages/cartPages/Cart.jsx';
-import CartDetails from './pages/cartPages/CartDetails.jsx';
-
+import { Suspense } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const Cart=lazy(() => import('./pages/cartPages/Cart.jsx'));
+  const CartDetails=lazy(() => import('./pages/cartPages/CartDetails.jsx'));
+  const ProductDetails=lazy(() => import('./pages/productPages/ProductDetails.jsx'));
+  const ProductList=lazy(() => import('./pages/productPages/ProductList.jsx'));
   return (
     <>
-      <div>
         <Router>
           <Header />
+          <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/cart-details/:id' element={<CartDetails />} />
           </Routes>
+          </Suspense>
         </Router>
-      </div>
     </>
   )
 }
