@@ -13,7 +13,6 @@ function App() {
   const ProductList=lazy(() => import('./pages/productPages/ProductList.jsx'));
   const NotFound=lazy(() => import('./pages/unknownPages/NotFound.jsx'));
   return (
-    <>
         <Router>
           <Header />
           <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
@@ -26,7 +25,6 @@ function App() {
           </Routes>
           </Suspense>
         </Router>
-    </>
   )
 }
 
