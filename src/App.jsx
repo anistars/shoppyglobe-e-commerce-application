@@ -1,8 +1,9 @@
 import { lazy, useState } from 'react'
-import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './pages/Header.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './App.css'
+import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
 
@@ -13,6 +14,7 @@ function App() {
   const ProductList=lazy(() => import('./pages/productPages/ProductList.jsx'));
   const NotFound=lazy(() => import('./pages/unknownPages/NotFound.jsx'));
   return (
+
         <Router>
           <Header />
           <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>

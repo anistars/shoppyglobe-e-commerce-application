@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import '../../index.css';
 
-function ProductList() {
+    function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -46,8 +46,8 @@ function ProductList() {
                     />
                   </div>
                   <div className="card-body text-center">
-                    <h5 className="product-title">{product.title}</h5>
-                    <p className="product-desc">{product.description}</p>
+                    <h5 className="card-title line-clamp-1">{product.title}</h5>
+                    <p className="card-text line-clamp-2">{product.description}</p>
                     <p className="product-price">💲{product.price}</p>
                   </div>
                 </div>
