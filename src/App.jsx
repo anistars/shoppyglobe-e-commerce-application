@@ -11,6 +11,7 @@ function App() {
   const CartDetails=lazy(() => import('./pages/cartPages/CartDetails.jsx'));
   const ProductDetails=lazy(() => import('./pages/productPages/ProductDetails.jsx'));
   const ProductList=lazy(() => import('./pages/productPages/ProductList.jsx'));
+  const NotFound=lazy(() => import('./pages/unknownPages/NotFound.jsx'));
   return (
     <>
         <Router>
@@ -21,6 +22,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/cart-details/:id' element={<CartDetails />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           </Suspense>
         </Router>
