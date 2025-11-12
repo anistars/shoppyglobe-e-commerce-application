@@ -15,7 +15,9 @@
 }
 
 /* Page Headers */
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   color: #00ffff;
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
 }
@@ -29,13 +31,16 @@ h2, h3, h4 {
   height: 80vh;
   text-align: center;
 }
+
 .not-found h1 {
   font-size: 5rem;
   color: #ff4444;
 }
+
 .not-found p {
   color: #e0e0e0;
 }
+
 .not-found a {
   margin-top: 20px;
   background-color: #00ffff;
@@ -44,6 +49,7 @@ h2, h3, h4 {
   border-radius: 8px;
   text-decoration: none;
 }
+
 .not-found a:hover {
   background-color: #00e0e0;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
@@ -57,4 +63,3 @@ footer {
   padding: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-

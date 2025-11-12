@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 function Header() {
-    const navigate=useNavigate();
-     return (
+  const navigate = useNavigate();
+  return (
     <header className="header-container">
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
         <div className="container-fluid">
