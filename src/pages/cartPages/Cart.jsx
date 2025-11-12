@@ -146,36 +146,51 @@ function Cart() {
       {cartItems.length === 0 ? (
         <p className="text-light text-center opacity-75">Your cart is empty.</p>
       ) : (
-        <div className="row g-4">
-          {cartItems.map((item) => (
-            <div key={item.id} className="col-12 col-md-6 col-lg-4">
-              <div className="cart-item-card card h-100 p-3">
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  className="cart-item-img mb-3"
-                />
-                <h5 className="neon-text text-center">{item.title}</h5>
-                <p className="text-center mb-1">Quantity: {item.quantity}</p>
-                <p className="text-center text-muted">Total: ${item.price * item.quantity}</p>
-                <div className="d-flex justify-content-between mt-auto">
-                  <button
-                    className="btn btn-outline-danger btn-sm"
-                    onClick={() => dispatch(removeFromCart(item.id))}
-                  >
-                    Remove
-                  </button>
-                  <button
-                    className="btn btn-outline-info btn-sm"
-                    onClick={() => navigate(`/cart-details/${item.id}`)}
-                  >
-                    View Details
-                  </button>
+        <>
+          {/* 🧮 Total Cost Section */}
+          <div className="total-cost-box text-center my-4">
+            <h4 className="neon-text">
+              Total Cost: $
+              {cartItems
+                .reduce((sum, item) => sum + item.price * item.quantity, 0)
+                .toFixed(2)}
+            </h4>
+          </div>
+
+          {/* Cart Items */}
+          <div className="row g-4 justify-content-center">
+            {cartItems.map((item) => (
+              <div key={item.id} className="col-12 col-md-6 col-lg-4">
+                <div className="cart-item-card card h-100 p-3">
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    className="cart-item-img mb-3"
+                  />
+                  <h5 className="neon-text text-center">{item.title}</h5>
+                  <p className="text-center mb-1">Quantity: {item.quantity}</p>
+                  <p className="text-center text-muted">
+                    Total: ${item.price * item.quantity}
+                  </p>
+                  <div className="d-flex justify-content-between mt-auto">
+                    <button
+                      className="btn btn-outline-danger btn-sm"
+                      onClick={() => dispatch(removeFromCart(item.id))}
+                    >
+                      Remove
+                    </button>
+                    <button
+                      className="btn btn-outline-info btn-sm"
+                      onClick={() => navigate(`/cart-details/${item.id}`)}
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
