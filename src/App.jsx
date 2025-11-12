@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react'
+import { lazy } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './pages/Header.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';

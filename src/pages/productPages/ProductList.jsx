@@ -1,6 +1,5 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import '../../index.css';
 
 function ProductList() {

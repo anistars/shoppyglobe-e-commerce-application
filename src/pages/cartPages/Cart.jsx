@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, clearCart, updateQuantity } from '../../features/cartSlice.js';
+import { removeFromCart, clearCart } from '../../features/cartSlice.js';
 import { useState } from 'react';
 import "../../index.css";
 

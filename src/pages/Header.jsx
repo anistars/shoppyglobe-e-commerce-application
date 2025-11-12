@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 function Header() {
@@ -7,8 +6,8 @@ function Header() {
     <header className="header-container">
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <span className="brand-glow">ShoppyGlobe</span>
+          <a className="navbar-brand">
+            <button className="btn home-btn"onClick={()=>navigate('/')}>ShoppyGlobe</button>
           </a>
           <div className="d-flex ms-auto">
             <button
