@@ -20,16 +20,45 @@ function Cart() {
   const [errors, setErrors] = useState({});
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!customer.name) newErrors.name = "Name is required";
-    if (!customer.email) newErrors.email = "Email is required";
-    if (!customer.phone.trim() || !/^\d{10}$/.test(customer.phone))
-      newErrors.phone = 'Valid 10-digit phone required';
-    if (!customer.address) newErrors.address = "Address is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+const validateForm = () => {
+  const newErrors = {};
+
+  // ✅ Name validation
+  if (!customer.name.trim()) {
+    newErrors.name = "Full name is required.";
+  } else if (!/^[A-Za-z\s]+$/.test(customer.name.trim())) {
+    newErrors.name = "Name should contain only letters and spaces.";
+  } else if (customer.name.trim().length < 3) {
+    newErrors.name = "Name must be at least 3 characters long.";
+  }
+
+  // ✅ Email validation
+  if (!customer.email.trim()) {
+    newErrors.email = "Email address is required.";
+  } else if (!/^[\w.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(customer.email.trim())) {
+    newErrors.email = "Please enter a valid email address (e.g., example@mail.com).";
+  }
+
+  // ✅ Phone validation
+  if (!customer.phone.trim()) {
+    newErrors.phone = "Phone number is required.";
+  } else if (!/^\d+$/.test(customer.phone.trim())) {
+    newErrors.phone = "Phone number should contain digits only.";
+  } else if (customer.phone.trim().length !== 10) {
+    newErrors.phone = "Phone number must be exactly 10 digits long.";
+  }
+
+  // ✅ Address validation
+  if (!customer.address.trim()) {
+    newErrors.address = "Delivery address is required.";
+  } else if (customer.address.trim().length < 10) {
+    newErrors.address = "Please enter a more detailed address (minimum 10 characters).";
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
 
   const handlePlaceOrder = () => {
     if (validateForm()) {
